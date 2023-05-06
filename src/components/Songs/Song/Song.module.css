@@ -1,0 +1,28 @@
+.Song {
+    display: grid;
+    grid: auto / 30px 40px 2fr 1fr 60px;
+    color: #fff;
+    text-align: left;
+    height: 56px;
+    align-items: center;
+    gap: 0 16px;
+    border-radius: 4px;
+}
+
+.Song:hover {
+    background-color: hsla(0,0%,100%,.1);
+    transition: 250ms linear;
+    cursor: pointer;
+}
+
+.Title {
+    margin-left:10px;
+}
+
+.Image {
+    max-width: 40px;
+}
+
+.Index {
+    text-align: center;
+}
