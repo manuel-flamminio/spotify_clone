@@ -1,0 +1,14 @@
+.Panel {
+    height: 100vh;
+    background-color: #000;
+    width: 240px;
+    color: #fff;
+    grid-row: 1 / 4;
+    grid-column: 1;
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10%;
+}
