@@ -1,0 +1,43 @@
+.Topbar {
+    height: 64px;
+    width: 100%;
+    grid-row: 1;
+    grid-column: 2;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+
+.Login {
+    background-color: #fff;
+    margin: 10px 10px;
+    height: 70%;
+    width: 100px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: 0px none;
+}
+
+.Sign {
+    color: #a7a7a6;
+    background-color: transparent;
+    border: 0px;
+    font-weight: 700;
+}
+
+.Sign:hover {
+    cursor: pointer;
+    color: #fff;
+    transition: 100ms linear;
+    transform: scale(1.1);
+    backface-visibility: hidden;
+}
+
+.Login:hover {
+    cursor: pointer;
+    transition: 100ms linear;
+    transform: scale(1.1);
+    backface-visibility: hidden;
+}
