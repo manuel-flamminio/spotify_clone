@@ -1,0 +1,47 @@
+.TimeBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.SongInfosContainer {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-bottom: 3px;
+  gap: 10px;
+}
+
+.SongInfosContainer > img {
+    max-width: 54px;
+}
+
+.SongInfos {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.Artist {
+    font-size: small;
+    opacity: 0.5;
+}
+
+.PlayerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.PlayerButtons > button {
+  border: 0px none;
+  width: 24px;
+  height: 24px;
+  border-radius: 14px;
+}
+
+.PlayerButtons > button > img {
+  max-width: 10px;
+}
