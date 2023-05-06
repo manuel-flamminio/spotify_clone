@@ -1,0 +1,33 @@
+.Cards {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    animation: inAnimation 100ms ease-in;
+}
+
+.Title {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 0px;
+    padding-top: 24px;
+    color: #fff;
+}
+
+@keyframes inAnimation {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .Cards {
+        overflow-x: scroll;
+        scrollbar-width: none;
+    }
+}

@@ -1,0 +1,38 @@
+.Card {
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: var(--background);
+    color: var(--text);
+    text-align: left;
+}
+
+.Card:hover {
+    background-color: #282828;
+    transition: 250ms linear;
+    cursor: pointer;
+}
+
+.Content {
+    margin: 15px 15px;
+}
+
+.Image {
+    border-radius: 10px;
+    max-width: 230px;
+    width: 100%;
+}
+
+.Title {
+    font-weight: 700;
+}
+
+.SubText {
+    color: #6a6a6a;
+}
+
+@media screen and (max-width: 770px) {
+    .Image {
+        width: auto;
+    }
+}
