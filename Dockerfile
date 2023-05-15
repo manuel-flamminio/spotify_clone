@@ -1,4 +1,4 @@
-FROM node:16.17.0-slim
+FROM node:16.17.0-slim as builder
 
 COPY . /project/
 
@@ -8,6 +8,8 @@ RUN ["npm", "install"]
 
 RUN ["npm", "run", "build"]
 
-RUN ["npm", "install", "-g", "serve"]
+FROM nginx
 
-CMD ["serve", "-s", "build"]
+COPY react.conf /etc/nginx/conf.d/react.conf
+
+COPY --from=builder /project/build/ /usr/local/spotify/
