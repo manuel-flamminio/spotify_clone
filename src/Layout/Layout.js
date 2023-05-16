@@ -52,6 +52,7 @@ const Layout = () => {
   const isMd = useMediaQuery({ minWidth: 1301 });
   const isSm = useMediaQuery({ minWidth: 1001 });
   const isXSm = useMediaQuery({ minWidth: 771 });
+  const isXXSm = useMediaQuery({ maxWidth: 770 });
 
   switch (true) {
     case isLg:
@@ -113,7 +114,7 @@ const Layout = () => {
 
   return (
     <div className={classes.Layout}>
-      <LeftPanel />
+      {!isXXSm ? <LeftPanel /> : null}
       <Topbar opacity={topbarOpacity} resetCards={resetSelectedAlbum} />
       <div
         id="LayoutContentDiv"

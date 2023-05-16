@@ -26,3 +26,9 @@
 .Index {
     text-align: center;
 }
+
+@media screen and (max-width: 540px) {
+    .Song {
+    grid: auto / 30px 40px 1fr;
+    }
+}

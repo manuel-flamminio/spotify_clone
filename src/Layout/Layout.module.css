@@ -24,3 +24,15 @@
     grid-row: 1;
     grid-column: 2;
 }
+
+
+@media screen and (max-width: 770px) {
+    .Layout {
+        grid-template: calc(100% - 72px) 72px / auto;
+    }
+
+    .Content {
+        grid-column: 1;
+        width: 100vw;
+    }
+}

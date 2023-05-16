@@ -1,6 +1,6 @@
 .Container {
     display: grid;
-    grid: fit-content(200px) auto / auto;
+    grid: fit-content(200px) auto / 100%;
     height: 100%;
     animation: inAnimation 100ms ease-in;
 }
