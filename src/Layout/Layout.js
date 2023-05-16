@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 import axios from "./../myAxios";
 import SongPage from "../containers/SongPage/SongPage";
 import { useDispatch, useSelector } from "react-redux";
-import { selectShade } from "../redux/uiSlice";
+import {
+  saveScrollYPosition,
+  selectShade,
+  selectYPosition,
+} from "../redux/uiSlice";
 import { selectPlayingSong } from "../redux/songSlice";
 import {
   replaceAlbum,
@@ -23,6 +27,7 @@ const Layout = () => {
   const selectedAlbum = useSelector(selectAlbum);
   const [scrollValue, setScrollValue] = useState(0);
   const shadeColor = useSelector(selectShade);
+  const scrollYPosition = useSelector(selectYPosition);
   const dispatch = useDispatch();
 
   const SCROLL_MAX_OPACITY = 300;
@@ -36,6 +41,9 @@ const Layout = () => {
 
   let resetSelectedAlbum = () => {
     dispatch(replaceAlbum(null));
+    document
+      .getElementById("LayoutContentDiv")
+      .scroll({ top: scrollYPosition, behavior: "instant" });
   };
 
   let trim = cards.length;
@@ -108,7 +116,12 @@ const Layout = () => {
       <LeftPanel />
       <Topbar opacity={topbarOpacity} resetCards={resetSelectedAlbum} />
       <div
-        onScroll={(e) => setScrollValue(e.target.scrollTop)}
+        id="LayoutContentDiv"
+        onScroll={(e) => {
+          setScrollValue(e.target.scrollTop);
+          if (selectedAlbum === null)
+            dispatch(saveScrollYPosition(e.target.scrollTop));
+        }}
         style={contentAdditionalStyle}
         className={[classes.Content, backgroundColor].join(" ")}
       >
