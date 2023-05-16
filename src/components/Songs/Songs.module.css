@@ -54,3 +54,10 @@
 .Index {
     text-align: center;
 }
+
+
+@media screen and (max-width: 660px) {
+    .Songs {
+        padding: 25px 30px;
+    }
+}

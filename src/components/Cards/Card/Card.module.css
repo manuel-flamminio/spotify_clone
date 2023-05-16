@@ -34,5 +34,6 @@
 @media screen and (max-width: 770px) {
     .Image {
         width: auto;
+        max-width: 170px;
     }
 }
