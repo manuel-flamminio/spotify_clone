@@ -1,12 +1,6 @@
-.TimeBar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
 .SongInfosContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding-left: 8px;
   padding-bottom: 3px;
@@ -14,25 +8,33 @@
 }
 
 .SongInfosContainer > img {
-    max-width: 54px;
+  max-width: 90vw;
+}
+
+.TimeBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
 .SongInfos {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .Artist {
-    font-size: small;
-    opacity: 0.5;
+  font-size: small;
+  opacity: 0.5;
 }
 
 .PlayerButtons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .PlayerButtons > button {
@@ -62,5 +64,4 @@
     padding-left: 2px;
     max-width: 17px;
   }
-
 }

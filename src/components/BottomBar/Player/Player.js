@@ -1,9 +1,15 @@
 import classes from "./Player.module.css";
+import mobileClasses from "./MobilePlayer.module.css";
 import playIcon from "../../../assets/play.png";
 import pauseIcon from "../../../assets/pause.png";
 import axios from "../../../myAxios";
+import { useDispatch } from "react-redux";
+import { setIsPlaying } from "../../../redux/songSlice";
 
 const Player = (props) => {
+  const dispatch = useDispatch();
+  const style = props.isMobileShowing ? mobileClasses : classes;
+
   let timeBar = (
     <input
       type="range"
@@ -17,15 +23,16 @@ const Player = (props) => {
   );
 
   let playPauseButton = (
-    <button
-      onClick={() =>
-        props.isPlaying
-          ? props.audioRef.current.pause()
-          : props.audioRef.current.play()
-      }
-    >
-      <img src={props.isPlaying ? pauseIcon : playIcon} />
-    </button>
+    <div className={style.PlayerButtons}>
+      <button
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(setIsPlaying(!props.isPlaying));
+        }}
+      >
+        <img src={props.isPlaying ? pauseIcon : playIcon} />
+      </button>
+    </div>
   );
 
   const formatTime = (timeMs) => {
@@ -39,32 +46,42 @@ const Player = (props) => {
   if (props.song) {
     component = (
       <>
-        <div className={classes.SongInfosContainer}>
+        <div className={style.SongInfosContainer}>
           <img
             src={`${axios.defaults.baseURL}albums/${props.song.album.id}/cover`}
           />
-          <div className={classes.SongInfos}>
+          <div className={style.SongInfos}>
             <span>{props.song.title}</span>
-            <span className={classes.Artist}>{props.song.artist.name}</span>
+            <span className={style.Artist}>{props.song.artist.name}</span>
           </div>
         </div>
-        <div className={classes.PlayerControls}>
-          <div className={classes.PlayerButtons}>{playPauseButton}</div>
-          <div className={classes.TimeBar}>
-            <span>{formatTime(props.currentTime)}</span>
-            {timeBar}
-            <span>{formatTime(props.duration)}</span>
-          </div>
-        </div>
-        <div>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            value={props.volume}
-            onChange={(event) => props.setVolume(event.target.value)}
-          ></input>
-        </div>
+
+        {!props.isXXSm || props.isMobileShowing ? (
+          <>
+            <div className={style.PlayerControls}>
+              {playPauseButton}
+              <div className={style.TimeBar}>
+                <span>{formatTime(props.currentTime)}</span>
+                {timeBar}
+                <span>{formatTime(props.duration)}</span>
+              </div>
+            </div>
+
+            {!props.isMobileShowing ? (
+              <div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={props.volume}
+                  onChange={(event) => props.setVolume(event.target.value)}
+                ></input>
+              </div>
+            ) : null}
+          </>
+        ) : (
+          playPauseButton
+        )}
       </>
     );
   }
