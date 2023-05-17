@@ -9,6 +9,7 @@
 
 .SongInfosContainer > img {
   max-width: 90vw;
+  max-height: 45dvh;
 }
 
 .TimeBar {

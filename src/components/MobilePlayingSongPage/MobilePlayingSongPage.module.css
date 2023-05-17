@@ -23,3 +23,10 @@
   border: none;
   color: inherit;
 }
+
+.PlayerControls {
+  height: 80dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
