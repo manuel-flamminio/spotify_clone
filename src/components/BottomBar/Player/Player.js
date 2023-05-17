@@ -2,11 +2,15 @@ import classes from "./Player.module.css";
 import mobileClasses from "./MobilePlayer.module.css";
 import playIcon from "../../../assets/play.png";
 import pauseIcon from "../../../assets/pause.png";
+import ColorThief from "colorthief";
+import { createRef } from "react";
 import axios from "../../../myAxios";
 import { useDispatch } from "react-redux";
 import { setIsPlaying } from "../../../redux/songSlice";
+import { replacePlayingSongShadeColor } from "../../../redux/uiSlice";
 
 const Player = (props) => {
+  const img = createRef();
   const dispatch = useDispatch();
   const style = props.isMobileShowing ? mobileClasses : classes;
 
@@ -48,7 +52,19 @@ const Player = (props) => {
       <>
         <div className={style.SongInfosContainer}>
           <img
+            crossOrigin={"anonymous"}
             src={`${axios.defaults.baseURL}albums/${props.song.album.id}/cover`}
+            ref={img}
+            onLoad={() => {
+              const colorThief = new ColorThief();
+              const currentImg = img.current;
+              const res = colorThief.getColor(currentImg);
+              dispatch(
+                replacePlayingSongShadeColor(
+                  `rgb(${res[0]}, ${res[1]}, ${res[2]})`
+                )
+              );
+            }}
           />
           <div className={style.SongInfos}>
             <span>{props.song.title}</span>
