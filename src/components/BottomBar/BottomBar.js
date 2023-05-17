@@ -91,6 +91,8 @@ const BottomBar = (props) => {
       />
     );
 
+  if (!isXXSm && showSong) setShowSong(false);
+
   let component = null;
   if (props.songID != null)
     component = (
