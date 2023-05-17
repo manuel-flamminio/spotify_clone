@@ -29,6 +29,7 @@
 @media screen and (max-width: 770px) {
     .Layout {
         grid-template: calc(100% - 72px) 72px / auto;
+        height: 100dvh;
     }
 
     .Content {
