@@ -26,5 +26,8 @@
 @media screen and (max-width: 620px) {
   .Bar {
     grid: auto / 2fr 1.2fr 1.2fr;
+    position: sticky;
+    bottom: 0;
+    z-index: 9;
   }
 }
