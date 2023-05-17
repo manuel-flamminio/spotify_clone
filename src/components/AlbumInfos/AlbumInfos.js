@@ -3,7 +3,7 @@ import axios from "../../myAxios";
 import ColorThief from "colorthief";
 import { createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { replace, selectShade } from "../../redux/uiSlice";
+import { replaceShadeColor, selectShade } from "../../redux/uiSlice";
 import { selectSongs } from "../../redux/songSlice";
 
 const AlbumInfos = (props) => {
@@ -28,7 +28,7 @@ const AlbumInfos = (props) => {
           const colorThief = new ColorThief();
           const currentImg = img.current;
           const res = colorThief.getColor(currentImg);
-          dispatch(replace(`rgb(${res[0]}, ${res[1]}, ${res[2]})`));
+          dispatch(replaceShadeColor(`rgb(${res[0]}, ${res[1]}, ${res[2]})`));
         }}
       />
       <div className={classes.AlbumInfos}>

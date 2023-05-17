@@ -7,7 +7,7 @@ export const uiSlice = createSlice({
   },
   name: "ui",
   reducers: {
-    replace: (state, action) => {
+    replaceShadeColor: (state, action) => {
       state.shadeColor = action.payload;
     },
     saveScrollYPosition: (state, action) => {
@@ -16,7 +16,7 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { replace, saveScrollYPosition } = uiSlice.actions;
+export const { replaceShadeColor, saveScrollYPosition } = uiSlice.actions;
 
 export const selectShade = (state) => state.ui.shadeColor;
 export const selectYPosition = (state) => state.ui.scrollYPosition;
