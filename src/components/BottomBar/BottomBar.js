@@ -24,7 +24,7 @@ const BottomBar = (props) => {
   const isXXSm = useMediaQuery({ maxWidth: 620 });
   const isPlaying = useSelector(selectIsPlaying);
   const songs = useSelector(selectSongs);
-  const globalCurrentTime = useSelector(selectCurrentTime)
+  const globalCurrentTime = useSelector(selectCurrentTime);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,6 +76,7 @@ const BottomBar = (props) => {
   );
 
   const handleShowSong = (showSongValue) => {
+    if (!isXXSm) return;
     setShowSong(showSongValue);
     dispatch(setCurrentTime(currentTime));
   };
