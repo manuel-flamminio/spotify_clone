@@ -5,7 +5,11 @@ ReactJS Spotify Site clone app made by me. Work in Progress.
 * Browse through albums
 * Explore Specific Album
 * Reproduce any song of the album
-* Controls to playing Audio8
+* Controls to playing Audio
+* Responsive
+
+## Live Demo
+You can try it [here](https://www.mflamminio.xyz/).
 
 ## Preview
 https://user-images.githubusercontent.com/132062401/236649985-23bc551c-6cae-4f19-9900-07da77986e5e.mp4
