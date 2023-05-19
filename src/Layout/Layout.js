@@ -14,15 +14,11 @@ import {
   selectYPosition,
 } from "../redux/uiSlice";
 import { selectPlayingSong } from "../redux/songSlice";
-import {
-  replaceAlbum,
-  replaceAlbums,
-  selectAlbum,
-  selectAlbums,
-} from "../redux/albumSlice";
+import { replaceAlbum, selectAlbum } from "../redux/albumSlice";
+import Section from "../components/Section/Section";
 
 const Layout = () => {
-  const cards = useSelector(selectAlbums);
+  const [sections, setSections] = useState([]);
   const playingSong = useSelector(selectPlayingSong);
   const selectedAlbum = useSelector(selectAlbum);
   const [scrollValue, setScrollValue] = useState(0);
@@ -34,8 +30,8 @@ const Layout = () => {
 
   useEffect(() => {
     axios
-      .get(`albums`)
-      .then((res) => dispatch(replaceAlbums(res.data)))
+      .get(`sections`)
+      .then((res) => setSections(res.data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -46,7 +42,7 @@ const Layout = () => {
       .scroll({ top: scrollYPosition, behavior: "instant" });
   };
 
-  let trim = cards.length;
+  let trim = 0;
 
   const isLg = useMediaQuery({ minWidth: 1601 });
   const isMd = useMediaQuery({ minWidth: 1301 });
@@ -76,13 +72,9 @@ const Layout = () => {
 
   switch (selectedAlbum) {
     case null:
-      component = (
-        <>
-          <Cards trim={trim} />
-          <Cards trim={trim} />
-          <Cards trim={trim} />
-        </>
-      );
+      component = sections.map((section) => (
+        <Section key={section.id} section={section} trim={trim} />
+      ));
 
       topbarOpacity = { background: "rgba(8,8,8,1)" };
       if (scrollValue < SCROLL_MAX_OPACITY) {
