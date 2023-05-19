@@ -1,6 +1,5 @@
 import LeftPanel from "../components/LeftPanel/LeftPanel";
 import classes from "./Layout.module.css";
-import Cards from "../components/Cards/Cards";
 import { useMediaQuery } from "react-responsive";
 import Topbar from "../components/Topbar/Topbar";
 import BottomBar from "../components/BottomBar/BottomBar";
@@ -37,9 +36,6 @@ const Layout = () => {
 
   let resetSelectedAlbum = () => {
     dispatch(replaceAlbum(null));
-    document
-      .getElementById("LayoutContentDiv")
-      .scroll({ top: scrollYPosition, behavior: "instant" });
   };
 
   let trim = 0;
@@ -110,9 +106,16 @@ const Layout = () => {
       <Topbar opacity={topbarOpacity} resetCards={resetSelectedAlbum} />
       <div
         id="LayoutContentDiv"
+        onLoad={() => {
+          if (selectedAlbum === null) {
+            document
+              .getElementById("LayoutContentDiv")
+              .scroll({ top: scrollYPosition, behavior: "instant" });
+          }
+        }}
         onScroll={(e) => {
           setScrollValue(e.target.scrollTop);
-          if (selectedAlbum === null)
+          if (selectedAlbum === null && e.target.scrollTop != 0)
             dispatch(saveScrollYPosition(e.target.scrollTop));
         }}
         style={contentAdditionalStyle}
