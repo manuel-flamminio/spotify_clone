@@ -19,9 +19,14 @@
 }
 
 .BackButton {
-  background: none;
-  border: none;
-  color: inherit;
+  color: #fff;
+  background-color: var(--background);
+  border: 1px solid #3d3d3d;
+  font-weight: 700;
+  height: 70%;
+  border-radius: 20px;
+  margin-left: 10px;
+  width: 60px;
 }
 
 .PlayerControls {
