@@ -1,34 +1,30 @@
 import { useEffect } from "react";
 import AlbumInfos from "../../components/AlbumInfos/AlbumInfos";
 import Songs from "../../components/Songs/Songs";
-import axios from "../../myAxios";
 import classes from "./SongPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectShade } from "../../redux/uiSlice";
-import { replaceSongs } from "../../redux/songSlice";
+import { useLoaderData, useParams } from "react-router-dom";
+import { replaceAlbum } from "../../redux/albumSlice";
 
-const SongPage = (props) => {
+const SongPage = () => {
   const shadeColor = useSelector(selectShade);
+  const album = useLoaderData();
   const dispatch = useDispatch();
+  const params = useParams();
 
   useEffect(() => {
-    document
-      .getElementById("LayoutContentDiv")
-      .scroll({ top: 0, behavior: "instant" });
-    axios
-      .get(`/albums/${props.id}/songs`)
-      .then((res) => dispatch(replaceSongs(res.data)))
-      .catch((err) => console.log(err));
+    dispatch(replaceAlbum(album));
   }, []);
 
   return (
     <div className={classes.Container}>
-      <AlbumInfos {...props} />
+      <AlbumInfos {...album} />
       <div
         style={{ background: shadeColor }}
         className={classes.BackgroundShade}
       ></div>
-      <Songs albumID={props.id} />
+      <Songs albumID={params.albumID} />
     </div>
   );
 };

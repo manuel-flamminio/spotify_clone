@@ -8,19 +8,52 @@ import { Provider } from "react-redux";
 import uiSlice from "./redux/uiSlice";
 import songSlice from "./redux/songSlice";
 import albumSlice from "./redux/albumSlice";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./Layout/Layout";
+import SongPage from "./containers/SongPage/SongPage";
+import Sections from "./components/Sections/Sections";
+import { sectionLoader, albumLoader } from "./routing/Loader";
+import ErrorPage from "./routing/ErrorPage/ErrorPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const store = configureStore({ reducer: {
-  ui: uiSlice,
-  songs: songSlice,
-  album: albumSlice
-} });
+const store = configureStore({
+  reducer: {
+    ui: uiSlice,
+    songs: songSlice,
+    album: albumSlice,
+  },
+});
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            loader: sectionLoader,
+            element: <Sections />,
+          },
+          {
+            path: "albums/:albumID",
+            loader: albumLoader,
+            element: <SongPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

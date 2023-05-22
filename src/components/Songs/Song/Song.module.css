@@ -15,6 +15,10 @@
     cursor: pointer;
 }
 
+.Playing {
+    color: green;
+}
+
 .Title {
     margin-left:10px;
 }

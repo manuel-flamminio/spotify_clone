@@ -5,10 +5,12 @@ import axios from "../../../myAxios";
 
 const Song = (props) => {
   const dispatch = useDispatch();
+  const isPlaying = props.id === props.playingSong
+  const additionalStyle = isPlaying ? classes.Playing : ""
 
   return (
     <div
-      className={classes.Song}
+      className={[classes.Song, additionalStyle].join(" ")}
       onClick={() => dispatch(replacePlayingSong(props.id))}
     >
       <span className={classes.Index}>{props.index + 1}</span>

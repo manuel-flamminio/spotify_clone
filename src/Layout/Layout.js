@@ -3,9 +3,7 @@ import classes from "./Layout.module.css";
 import { useMediaQuery } from "react-responsive";
 import Topbar from "../components/Topbar/Topbar";
 import BottomBar from "../components/BottomBar/BottomBar";
-import { useEffect, useState } from "react";
-import axios from "./../myAxios";
-import SongPage from "../containers/SongPage/SongPage";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   saveScrollYPosition,
@@ -13,65 +11,40 @@ import {
   selectYPosition,
 } from "../redux/uiSlice";
 import { selectPlayingSong } from "../redux/songSlice";
-import { replaceAlbum, selectAlbum } from "../redux/albumSlice";
-import Section from "../components/Section/Section";
+import { Outlet, useParams } from "react-router-dom";
 
 const Layout = () => {
-  const [sections, setSections] = useState([]);
   const playingSong = useSelector(selectPlayingSong);
-  const selectedAlbum = useSelector(selectAlbum);
   const [scrollValue, setScrollValue] = useState(0);
   const shadeColor = useSelector(selectShade);
   const scrollYPosition = useSelector(selectYPosition);
   const dispatch = useDispatch();
+  const params = useParams();
+  const contentDiv = useRef(null);
 
   const SCROLL_MAX_OPACITY = 300;
-
-  useEffect(() => {
-    axios
-      .get(`sections`)
-      .then((res) => setSections(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  let resetSelectedAlbum = () => {
-    dispatch(replaceAlbum(null));
-  };
-
-  let trim = 0;
-
-  const isLg = useMediaQuery({ minWidth: 1601 });
-  const isMd = useMediaQuery({ minWidth: 1301 });
-  const isSm = useMediaQuery({ minWidth: 1001 });
-  const isXSm = useMediaQuery({ minWidth: 771 });
   const isXXSm = useMediaQuery({ maxWidth: 770 });
 
-  switch (true) {
-    case isLg:
-      trim = 8;
-      break;
-    case isMd:
-      trim = 6;
-      break;
-    case isSm:
-      trim = 4;
-      break;
-    case isXSm:
-      trim = 3;
-      break;
-  }
+  useEffect(() => {
+    if (params.albumID === undefined) handleScroll(scrollYPosition);
+    else handleScroll(0);
+  }, [params]);
 
   let topbarOpacity = null;
   let contentAdditionalStyle = null;
-  let component = null;
   let backgroundColor = null;
 
-  switch (selectedAlbum) {
-    case null:
-      component = sections.map((section) => (
-        <Section key={section.id} section={section} trim={trim} />
-      ));
+  const handleScroll = (scrollYTop) => {
+    if (!contentDiv) return;
 
+    contentDiv.current.scroll({
+      top: scrollYTop,
+      behavior: "instant",
+    });
+  };
+
+  switch (params.albumID) {
+    case undefined:
       topbarOpacity = { background: "rgba(8,8,8,1)" };
       if (scrollValue < SCROLL_MAX_OPACITY) {
         const opacityLevel = scrollValue / SCROLL_MAX_OPACITY + 0.5;
@@ -84,8 +57,6 @@ const Layout = () => {
       break;
 
     default:
-      component = <SongPage {...selectedAlbum} />;
-
       if (scrollValue > 230)
         topbarOpacity = {
           background:
@@ -103,25 +74,18 @@ const Layout = () => {
   return (
     <div className={classes.Layout}>
       {!isXXSm ? <LeftPanel /> : null}
-      <Topbar opacity={topbarOpacity} resetCards={resetSelectedAlbum} />
+      <Topbar opacity={topbarOpacity} />
       <div
-        id="LayoutContentDiv"
-        onLoad={() => {
-          if (selectedAlbum === null) {
-            document
-              .getElementById("LayoutContentDiv")
-              .scroll({ top: scrollYPosition, behavior: "instant" });
-          }
-        }}
+        ref={contentDiv}
         onScroll={(e) => {
           setScrollValue(e.target.scrollTop);
-          if (selectedAlbum === null && e.target.scrollTop != 0)
+          if (params.albumID === undefined && e.target.scrollTop !== 0)
             dispatch(saveScrollYPosition(e.target.scrollTop));
         }}
         style={contentAdditionalStyle}
         className={[classes.Content, backgroundColor].join(" ")}
       >
-        {component}
+        <Outlet />
       </div>
       <BottomBar songID={playingSong} />
     </div>

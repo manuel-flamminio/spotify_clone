@@ -21,11 +21,14 @@
 }
 
 .Sign {
-    color: #a7a7a6;
-    background-color: transparent;
-    border: 0px;
+    color: #fff;
+    background-color: var(--background);
+    border: 1px solid #3d3d3d;
     font-weight: 700;
-    padding-left: 10px;
+    height: 60%;
+    border-radius: 20px;
+    margin-left: 10px;
+    width: 80px;
 }
 
 .Sign:hover {
@@ -34,6 +37,11 @@
     transition: 100ms linear;
     transform: scale(1.1);
     backface-visibility: hidden;
+}
+
+.Sign:disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .Login:hover {

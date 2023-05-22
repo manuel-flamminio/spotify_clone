@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "../../myAxios";
-import Cards from "../Cards/Cards";
+import axios from "../../../myAxios";
+import Cards from "../../Cards/Cards";
 
 const Section = (props) => {
   const [albums, setAlbums] = useState([]);

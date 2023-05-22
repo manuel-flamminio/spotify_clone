@@ -42,7 +42,6 @@ const BottomBar = (props) => {
     }
   }, [isPlaying]);
 
-  // console.log(audioRef)
   const onTimeSeeked = (value) => {
     setLocalCurrentTime(value);
     audioRef.current.currentTime = value;

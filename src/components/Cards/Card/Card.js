@@ -1,10 +1,9 @@
 import classes from "./Card.module.css";
 import axios from '../../../myAxios'
-import { useDispatch } from "react-redux";
-import { replaceAlbum } from "../../../redux/albumSlice";
+import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
   let title = props.card.title;
 
   if (props.min < 6)
@@ -13,7 +12,9 @@ const Card = (props) => {
   if (title.length < props.card.title.length) title = title.concat("...");
 
   return (
-    <div className={classes.Card} onClick={() => dispatch(replaceAlbum(props.card))}>
+    <div className={classes.Card} onClick={() => {
+      navigate(`/albums/${props.card.id}`)
+      }}>
       <div className={classes.Content}>
         <img
           className={classes.Image}
