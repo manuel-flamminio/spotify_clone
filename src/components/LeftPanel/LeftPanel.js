@@ -5,11 +5,11 @@ import home from "./../../assets/home.png";
 import library from "./../../assets/library.png";
 import search from "./../../assets/search.png";
 
-const LeftPanel = (props) => {
+const LeftPanel = () => {
   const items = [
-    { icon: home, text: "Home" },
-    { icon: search, text: "Search" },
-    { icon: library, text: "Library" },
+    { icon: home, text: "Home", path: "/" },
+    { icon: search, text: "Search", path: "/search" },
+    { icon: library, text: "Library", path: "/library" },
   ];
 
   return (
@@ -17,7 +17,7 @@ const LeftPanel = (props) => {
       <div className={classes.Content}>
         <Logo />
         <NavItems items={items} />
-        <NavItems items={items.slice(0,2)} /> 
+        {/* <NavItems items={items.slice(0,2)} />  */}
         {/* Playlist al posto di quello sopra */}
       </div>
     </div>
