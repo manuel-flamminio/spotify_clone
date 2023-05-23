@@ -14,6 +14,7 @@ import SongPage from "./containers/SongPage/SongPage";
 import Sections from "./components/Sections/Sections";
 import { sectionLoader, albumLoader } from "./routing/Loader";
 import ErrorPage from "./routing/ErrorPage/ErrorPage";
+import SearchSongPage from "./containers/SearchSongPage/SearchSongPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             path: "albums/:albumID",
             loader: albumLoader,
             element: <SongPage />,
+          },
+          {
+            path: "search",
+            element: <SearchSongPage />,
           },
         ],
       },

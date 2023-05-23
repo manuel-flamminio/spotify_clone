@@ -9,7 +9,6 @@ const LeftPanel = () => {
   const items = [
     { icon: home, text: "Home", path: "/" },
     { icon: search, text: "Search", path: "/search" },
-    { icon: library, text: "Library", path: "/library" },
   ];
 
   return (
@@ -17,8 +16,6 @@ const LeftPanel = () => {
       <div className={classes.Content}>
         <Logo />
         <NavItems items={items} />
-        {/* <NavItems items={items.slice(0,2)} />  */}
-        {/* Playlist al posto di quello sopra */}
       </div>
     </div>
   );

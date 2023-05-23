@@ -9,11 +9,8 @@ import {
   selectPlayingSong,
   selectSongs,
   setIsPlaying,
-  replaceSongs
 } from "../../redux/songSlice";
 import { useMediaQuery } from "react-responsive";
-import { useEffect } from "react";
-import axios from '../../myAxios'
 
 const Songs = (props) => {
   const albumSongs = useSelector(selectSongs);
@@ -22,19 +19,12 @@ const Songs = (props) => {
   const isPlaying = useSelector(selectIsPlaying);
   const isXXSm = useMediaQuery({ maxWidth: 540 });
 
-  useEffect(() => {
-    axios
-      .get(`/albums/${props.albumID}/songs`)
-      .then((res) => dispatch(replaceSongs(res.data)))
-      .catch((err) => console.log(err));
-  }, []);
-
   let songs = null;
   if (albumSongs.length > 0)
     songs = albumSongs.map((item, index) => (
       <Song
         isXXSm={isXXSm}
-        albumID={props.albumID}
+        albumID={props.albumID ? props.albumID : item.album ? item.album.id : null}
         key={item.id}
         index={index}
         playingSong={playingSong}

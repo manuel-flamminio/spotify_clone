@@ -1,0 +1,28 @@
+.SearchBar {
+    background: none;
+    border: 0px;
+    color: #fff;
+}
+
+.SearchBar:focus {
+    outline: none;
+}
+
+.BarContainer {
+    background-color: var(--background);
+    border: 1px solid #3d3d3d;
+    width: 50%;
+    margin: 50px auto auto auto;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.Image {
+    padding-left: 10px;
+    height: 20px;
+    filter: invert(1);
+}
